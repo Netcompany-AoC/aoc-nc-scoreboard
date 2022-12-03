@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/aoc-nc-scoreboard/static/css/main.0edc94ab.chunk.css",
-    "main.js": "/aoc-nc-scoreboard/static/js/main.1c12ca24.chunk.js",
-    "main.js.map": "/aoc-nc-scoreboard/static/js/main.1c12ca24.chunk.js.map",
+    "main.js": "/aoc-nc-scoreboard/static/js/main.a33668ce.chunk.js",
+    "main.js.map": "/aoc-nc-scoreboard/static/js/main.a33668ce.chunk.js.map",
     "runtime-main.js": "/aoc-nc-scoreboard/static/js/runtime-main.2cbc7a5d.js",
     "runtime-main.js.map": "/aoc-nc-scoreboard/static/js/runtime-main.2cbc7a5d.js.map",
     "static/js/2.20e4d1e8.chunk.js": "/aoc-nc-scoreboard/static/js/2.20e4d1e8.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.2cbc7a5d.js",
     "static/js/2.20e4d1e8.chunk.js",
     "static/css/main.0edc94ab.chunk.css",
-    "static/js/main.1c12ca24.chunk.js"
+    "static/js/main.a33668ce.chunk.js"
   ]
 }
