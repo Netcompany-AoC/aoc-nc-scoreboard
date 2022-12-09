@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/aoc-nc-scoreboard/static/css/main.6b99d39f.chunk.css",
-    "main.js": "/aoc-nc-scoreboard/static/js/main.c5d02629.chunk.js",
-    "main.js.map": "/aoc-nc-scoreboard/static/js/main.c5d02629.chunk.js.map",
-    "runtime-main.js": "/aoc-nc-scoreboard/static/js/runtime-main.6a5becad.js",
-    "runtime-main.js.map": "/aoc-nc-scoreboard/static/js/runtime-main.6a5becad.js.map",
-    "static/js/2.ee01d65b.chunk.js": "/aoc-nc-scoreboard/static/js/2.ee01d65b.chunk.js",
-    "static/js/2.ee01d65b.chunk.js.map": "/aoc-nc-scoreboard/static/js/2.ee01d65b.chunk.js.map",
+    "main.css": "/aoc-nc-scoreboard/static/css/main.2d3a8033.chunk.css",
+    "main.js": "/aoc-nc-scoreboard/static/js/main.b5dd793b.chunk.js",
+    "main.js.map": "/aoc-nc-scoreboard/static/js/main.b5dd793b.chunk.js.map",
+    "runtime-main.js": "/aoc-nc-scoreboard/static/js/runtime-main.85dd8648.js",
+    "runtime-main.js.map": "/aoc-nc-scoreboard/static/js/runtime-main.85dd8648.js.map",
+    "static/js/2.ab854380.chunk.js": "/aoc-nc-scoreboard/static/js/2.ab854380.chunk.js",
+    "static/js/2.ab854380.chunk.js.map": "/aoc-nc-scoreboard/static/js/2.ab854380.chunk.js.map",
     "static/js/3.af49fb69.chunk.js": "/aoc-nc-scoreboard/static/js/3.af49fb69.chunk.js",
     "static/js/3.af49fb69.chunk.js.map": "/aoc-nc-scoreboard/static/js/3.af49fb69.chunk.js.map",
-    "static/js/4.2cb7ac8a.chunk.js": "/aoc-nc-scoreboard/static/js/4.2cb7ac8a.chunk.js",
-    "static/js/4.2cb7ac8a.chunk.js.map": "/aoc-nc-scoreboard/static/js/4.2cb7ac8a.chunk.js.map",
+    "static/js/4.3df30841.chunk.js": "/aoc-nc-scoreboard/static/js/4.3df30841.chunk.js",
+    "static/js/4.3df30841.chunk.js.map": "/aoc-nc-scoreboard/static/js/4.3df30841.chunk.js.map",
     "index.html": "/aoc-nc-scoreboard/index.html",
-    "static/css/main.6b99d39f.chunk.css.map": "/aoc-nc-scoreboard/static/css/main.6b99d39f.chunk.css.map",
-    "static/js/2.ee01d65b.chunk.js.LICENSE.txt": "/aoc-nc-scoreboard/static/js/2.ee01d65b.chunk.js.LICENSE.txt"
+    "static/css/main.2d3a8033.chunk.css.map": "/aoc-nc-scoreboard/static/css/main.2d3a8033.chunk.css.map",
+    "static/js/2.ab854380.chunk.js.LICENSE.txt": "/aoc-nc-scoreboard/static/js/2.ab854380.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.6a5becad.js",
-    "static/js/2.ee01d65b.chunk.js",
-    "static/css/main.6b99d39f.chunk.css",
-    "static/js/main.c5d02629.chunk.js"
+    "static/js/runtime-main.85dd8648.js",
+    "static/js/2.ab854380.chunk.js",
+    "static/css/main.2d3a8033.chunk.css",
+    "static/js/main.b5dd793b.chunk.js"
   ]
 }
