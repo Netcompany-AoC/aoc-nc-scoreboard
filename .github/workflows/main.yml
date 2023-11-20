@@ -24,7 +24,7 @@ jobs:
         uses: DamianReeves/write-file-action@master
         with:
           path: ./src/scores.json
-          contents: ${{env.fetch-api-data}}
+          contents: ${{env.fetchApiData}}
           write-mode: overwrite
       - name: Install dependencies
         run: |
