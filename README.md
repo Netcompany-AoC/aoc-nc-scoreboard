@@ -8,5 +8,7 @@ Outbound calls are to https://adventofcode.com/2023/leaderboard/private/view/225
 The User-Agent header under jobs -> update-scores -> steps -> Fetch Scores -> with -> configuration is set to the maintainers tfe@netcompany.com and chce@netcompany.com
 
 # Status
-[![pages-build-deployment](https://github.com/Netcompany-AoC-DK/aoc-nc-scoreboard/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Netcompany-AoC-DK/aoc-nc-scoreboard/actions/workflows/pages/pages-build-deployment)
-[![Update Scores](https://github.com/Netcompany-AoC-DK/aoc-nc-scoreboard/actions/workflows/main.yml/badge.svg)](https://github.com/Netcompany-AoC-DK/aoc-nc-scoreboard/actions/workflows/main.yml)
+|||
+|-|-|
+| Deploy | [![pages-build-deployment](https://github.com/Netcompany-AoC-DK/aoc-nc-scoreboard/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Netcompany-AoC-DK/aoc-nc-scoreboard/actions/workflows/pages/pages-build-deployment) |
+| Update scores: | [![Update Scores](https://github.com/Netcompany-AoC-DK/aoc-nc-scoreboard/actions/workflows/main.yml/badge.svg)](https://github.com/Netcompany-AoC-DK/aoc-nc-scoreboard/actions/workflows/main.yml) |
