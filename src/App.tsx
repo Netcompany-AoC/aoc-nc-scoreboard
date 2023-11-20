@@ -56,7 +56,7 @@ function App() {
         <span className="privboard-days">
           {days.map((day, idx) => {
             // eslint-disable-next-line jsx-a11y/anchor-is-valid
-            return day ? <a href="" className={""+(idx+1) === selectedDay ? 'bold':''} onClick={(ev) => {
+            return day ? <a href="" className={""+(idx+1) === selectedDay ? 'leaderboard-daylinks-selected':''} onClick={(ev) => {
               ev.preventDefault()
               ev.stopPropagation();
               setSelectedDay(""+(idx+1));
