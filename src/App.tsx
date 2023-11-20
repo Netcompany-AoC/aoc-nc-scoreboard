@@ -59,7 +59,7 @@ function App() {
             return day ? <a href="" className={""+(idx+1) === selectedDay ? 'leaderboard-daylinks-selected':''} onClick={(ev) => {
               ev.preventDefault()
               ev.stopPropagation();
-              ev.target.blur();
+              ev.currentTarget.blur();
               setSelectedDay(""+(idx+1));
               setPlayers(sortPlayersForDay(""+(idx+1), selectedScoreType, players));
             }}>{(idx+1).toString().split('').map((dayNumber, dayNumberIdx) => <>{dayNumberIdx > 0 ? <br/> : <></>}{dayNumber}</>)}</a> : <span>{(idx+1).toString().split('').map((dayNumber, dayNumberIdx) => <>{dayNumberIdx > 0 ? <br/> : <></>}{dayNumber}</>)}</span>
