@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/aoc-nc-scoreboard/static/css/main.d9a4cac8.css",
-    "main.js": "/aoc-nc-scoreboard/static/js/main.7a9ec0aa.js",
-    "static/js/399.13cd39c0.chunk.js": "/aoc-nc-scoreboard/static/js/399.13cd39c0.chunk.js",
+    "main.css": "/aoc-nc-scoreboard/static/css/main.c7ae466d.css",
+    "main.js": "/aoc-nc-scoreboard/static/js/main.991cccce.js",
+    "static/js/399.2199fbf9.chunk.js": "/aoc-nc-scoreboard/static/js/399.2199fbf9.chunk.js",
     "static/js/787.ba1edb31.chunk.js": "/aoc-nc-scoreboard/static/js/787.ba1edb31.chunk.js",
     "index.html": "/aoc-nc-scoreboard/index.html",
-    "main.d9a4cac8.css.map": "/aoc-nc-scoreboard/static/css/main.d9a4cac8.css.map",
-    "main.7a9ec0aa.js.map": "/aoc-nc-scoreboard/static/js/main.7a9ec0aa.js.map",
+    "main.c7ae466d.css.map": "/aoc-nc-scoreboard/static/css/main.c7ae466d.css.map",
+    "main.991cccce.js.map": "/aoc-nc-scoreboard/static/js/main.991cccce.js.map",
     "787.ba1edb31.chunk.js.map": "/aoc-nc-scoreboard/static/js/787.ba1edb31.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d9a4cac8.css",
-    "static/js/main.7a9ec0aa.js"
+    "static/css/main.c7ae466d.css",
+    "static/js/main.991cccce.js"
   ]
 }
