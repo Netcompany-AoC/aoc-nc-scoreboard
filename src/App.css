@@ -487,8 +487,12 @@ form#settings input[type="checkbox"] ~ span {
 .privboard-name {
   vertical-align: text-bottom;
 }
-.privboard-days > span    { display: inline-block; color: #333333; }
-.privboard-days > a       { display: inline-block; }
+.privboard-days > span, .privboard-days > a { 
+  display: inline-block; 
+  padding-right: 10px;
+  line-height: 1em;
+}
+.privboard-days > span    { color: #333333; }
 .privboard-star-locked    { visibility: hidden; }
 .privboard-star-unlocked  { color: #333333; }
 .privboard-star-firstonly { color: #9999cc; }
