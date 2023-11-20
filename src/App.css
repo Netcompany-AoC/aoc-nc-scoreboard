@@ -155,6 +155,16 @@ header h1 {
 header h1 span {
   font-size: 1.2em;
 }
+header h1 a {
+  display: inline-block;
+  text-decoration: none;
+  color: #00cc00;
+  text-shadow: 0 0 2px #00cc00, 0 0 5px #00cc00;
+}
+header h1 a:hover, header h1 a:focus {
+  color: #99ff99;
+  text-shadow: 0 0 2px #99ff99, 0 0 5px #99ff99;
+}
 header h1.title-event .title-event-wrap {
   opacity: .33;
   white-space: pre;
@@ -477,8 +487,12 @@ form#settings input[type="checkbox"] ~ span {
 .privboard-name {
   vertical-align: text-bottom;
 }
-.privboard-days > span    { display: inline-block; color: #333333; }
-.privboard-days > a       { display: inline-block; }
+.privboard-days > span, .privboard-days > a { 
+  display: inline-block; 
+  padding-right: 10px;
+  line-height: 1em;
+}
+.privboard-days > span    { color: #333333; }
 .privboard-star-locked    { visibility: hidden; }
 .privboard-star-unlocked  { color: #333333; }
 .privboard-star-firstonly { color: #9999cc; }
@@ -510,7 +524,7 @@ form#settings input[type="checkbox"] ~ span {
   top: 3px;
   bottom: 0px;
   border: 1px solid #333340;
-  background: #10101a;
+  background: #123836;
 }
 a.bold {
   font-weight: bold;
