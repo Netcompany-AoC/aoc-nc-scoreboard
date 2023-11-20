@@ -30,14 +30,14 @@ a {
   font-size: 1.1rem;
 }
 @media (hover: hover) {
-  a:hover, .link-like-button:hover {
+  a.leaderboard-daylinks-selected:hover {
       color: #99ff99;
   }
 }
- a:focus {
+ a:not(.leaderboard-daylinks-selected):hover, a:focus {
   color: #99ff99;
 }
-.link-like-button:focus {
+.link-like-button:hover, .link-like-button:focus {
   color: #99ff99;
 }
 h1, h2 {
