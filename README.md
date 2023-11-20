@@ -10,7 +10,7 @@ Calls are also made at each merge of a pull request, which is not very often.
 The User-Agent header under jobs -> update-scores -> steps -> Fetch Scores -> with -> configuration is set to the maintainers tfe@netcompany.com and chce@netcompany.com
 
 # Status
-|||
+|Action|Status|
 |-|-|
-| Deploy | [![pages-build-deployment](https://github.com/Netcompany-AoC-DK/aoc-nc-scoreboard/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Netcompany-AoC-DK/aoc-nc-scoreboard/actions/workflows/pages/pages-build-deployment) |
-| Update scores: | [![Update Scores](https://github.com/Netcompany-AoC-DK/aoc-nc-scoreboard/actions/workflows/main.yml/badge.svg)](https://github.com/Netcompany-AoC-DK/aoc-nc-scoreboard/actions/workflows/main.yml) |
+| Update scores | [![Update Scores](https://github.com/Netcompany-AoC-DK/aoc-nc-scoreboard/actions/workflows/main.yml/badge.svg)](https://github.com/Netcompany-AoC-DK/aoc-nc-scoreboard/actions/workflows/main.yml) |
+| Deploy (triggered by above) | [![pages-build-deployment](https://github.com/Netcompany-AoC-DK/aoc-nc-scoreboard/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Netcompany-AoC-DK/aoc-nc-scoreboard/actions/workflows/pages/pages-build-deployment) |
