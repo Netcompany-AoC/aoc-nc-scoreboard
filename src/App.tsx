@@ -80,7 +80,7 @@ function App() {
       </select>
 
         {players.map((player, idx) => {
-          return renderPlayer(player[1], selectedDay, idx, selectedScoreType);
+          return renderPlayer(player[1], selectedDay, player.placement, selectedScoreType, player.placement === idx+1 ? false: true);
         })}
         
       </section>
@@ -101,91 +101,124 @@ function App() {
 function getNthStarTs(player: any, n: number, day: string) {
   return player.completion_day_level[day]?.[""+n]?.get_star_ts;
 }
+
+function setPlacements(players: any[], day: string, comp: (playerA: any, playerB: any, day: string) => number): any[] {
+  let prev: any; // Kunne gøres smartere... Men dette er lettest :-)
+  players.forEach((t,i,a) => {
+    if (i === 0) {
+      t.placement = i+1;
+      prev = t;
+      return t
+    }
+    if (comp(t,prev,day) === 0) {
+      t.placement = prev.placement;
+      prev = t
+      return t;
+    } else {
+      t.placement = i+1
+      prev = t
+      return t;
+    }
+  });
+  return players;
+}
+
 function sortPlayersForDay(day: string, highscoreType: HighscoreType, playerList: any[]): any[] {
   switch(highscoreType) {
     case HighscoreType.BothStars:
-      return bothStarsSort(day, playerList);
+      return setPlacements(bothStarsSort(day, playerList),day,bothStarsCompare)
     case HighscoreType.Delta:
-      return deltaDaySort(day, playerList);
+      return setPlacements(deltaDaySort(day, playerList), day, deltaDayCompare)
     case HighscoreType.StarGain:
-      return starGainSort(day, playerList);
+      return setPlacements(starGainSort(day, playerList), day, starGainCompare)
     case HighscoreType.FirstStar:
-      return firstStarSort(day, playerList);
+      return setPlacements(firstStarSort(day, playerList), day, firstStarCompare)
     case HighscoreType.Total:
-      return totalScoreSort(day, playerList);
+      return setPlacements(totalScoreSort(day, playerList), day, totalScoreCompare)
   }
 }
-function bothStarsSort(day: string, playerList: any[]): any[] {
-  return [...playerList].sort((playerA, playerB) => {
-    const playerA2Ts = getNthStarTs(playerA[1], 2, day);
-    const playerB2Ts = getNthStarTs(playerB[1], 2, day);
-    const playerA1Ts = getNthStarTs(playerA[1], 1, day);
-    const playerB1Ts = getNthStarTs(playerB[1], 1, day);
-    if (playerA2Ts && playerB2Ts) {
-      return playerA2Ts - playerB2Ts;
-    } else if (playerA2Ts && !playerB2Ts) {
-      return playerA2Ts - Number.MAX_SAFE_INTEGER;
-    } else if (!playerA2Ts && playerB2Ts) {
-      return Number.MAX_SAFE_INTEGER - playerB2Ts;
-    }
-    return (playerA1Ts ?? Number.MAX_SAFE_INTEGER) - (playerB1Ts ?? Number.MAX_SAFE_INTEGER);
-  });
+
+function bothStarsCompare(playerA: any, playerB: any, day: string) {
+  const playerA2Ts = getNthStarTs(playerA[1], 2, day);
+  const playerB2Ts = getNthStarTs(playerB[1], 2, day);
+  const playerA1Ts = getNthStarTs(playerA[1], 1, day);
+  const playerB1Ts = getNthStarTs(playerB[1], 1, day);
+  if (playerA2Ts && playerB2Ts) {
+    return playerA2Ts - playerB2Ts;
+  } else if (playerA2Ts && !playerB2Ts) {
+    return playerA2Ts - Number.MAX_SAFE_INTEGER;
+  } else if (!playerA2Ts && playerB2Ts) {
+    return Number.MAX_SAFE_INTEGER - playerB2Ts;
+  }
+  return (playerA1Ts ?? Number.MAX_SAFE_INTEGER) - (playerB1Ts ?? Number.MAX_SAFE_INTEGER);
 }
+
+function bothStarsSort(day: string, playerList: any[]): any[] {
+  return [...playerList].sort((playerA, playerB) => bothStarsCompare(playerA, playerB, day));
+}
+
+function deltaDayCompare(playerA: any, playerB: any, day: string) {
+  const playerA2Ts = getNthStarTs(playerA[1], 2, day);
+  const playerB2Ts = getNthStarTs(playerB[1], 2, day);
+  const playerA1Ts = getNthStarTs(playerA[1], 1, day);
+  const playerB1Ts = getNthStarTs(playerB[1], 1, day);
+  if (playerA2Ts && playerB2Ts) {
+    return (playerA2Ts - playerA1Ts) - (playerB2Ts - playerB1Ts);
+  } else if (playerA2Ts && !playerB2Ts) {
+    return (playerA2Ts - playerA1Ts) - Number.MAX_SAFE_INTEGER;
+  } else if (!playerA2Ts && playerB2Ts) {
+    return Number.MAX_SAFE_INTEGER - (playerB2Ts - playerB1Ts);
+  }
+  return 0;
+}
+
 function deltaDaySort(day: string, playerList: any[]) {
-  return [...playerList].sort((playerA, playerB) => {
-    const playerA2Ts = getNthStarTs(playerA[1], 2, day);
-    const playerB2Ts = getNthStarTs(playerB[1], 2, day);
-    const playerA1Ts = getNthStarTs(playerA[1], 1, day);
-    const playerB1Ts = getNthStarTs(playerB[1], 1, day);
-    if (playerA2Ts && playerB2Ts) {
-      return (playerA2Ts - playerA1Ts) - (playerB2Ts - playerB1Ts);
-    } else if (playerA2Ts && !playerB2Ts) {
-      return (playerA2Ts - playerA1Ts) - Number.MAX_SAFE_INTEGER;
-    } else if (!playerA2Ts && playerB2Ts) {
-      return Number.MAX_SAFE_INTEGER - (playerB2Ts - playerB1Ts);
-    }
-    return 0;
-  });
+  return [...playerList].sort((playerA, playerB) => deltaDayCompare(playerA, playerB, day));
+}
+
+function totalScoreCompare(playerA: any, playerB: any, day: string) {
+  let a = 0;
+  let b = 0;
+  for (let i = 1; i <= +day; i++) {
+    a+=getTotalPointGainForDay(i, playerA[1]);
+    b+=getTotalPointGainForDay(i, playerB[1]);
+  }
+  return b-a;
 }
 
 // You can get away with all kinds of sickening complexity when N < 200
 function totalScoreSort(day: string, playerList: any[]) {
-  return [...playerList].sort((playerA, playerB) => {
-    let a = 0;
-    let b = 0;
-    for (let i = 1; i <= +day; i++) {
-      a+=getTotalPointGainForDay(i, playerA[1]);
-      b+=getTotalPointGainForDay(i, playerB[1]);
-    }
-    return b-a;
-  })
+  return [...playerList].sort((playerA, playerB) => totalScoreCompare(playerA,playerB,day))
 }
 
+function starGainCompare(playerA: any, playerB: any, day: string) {
+  const playerA1Star = parseInt(playerA[1].completion_day_level[day]?.["1"]?.star_gain);
+  const playerA2Star = parseInt(playerA[1].completion_day_level[day]?.["2"]?.star_gain);
+  const playerAStarGain = playerA1Star + playerA2Star;
+  const playerB1Star = parseInt(playerB[1].completion_day_level[day]?.["1"]?.star_gain);
+  const playerB2Star = parseInt(playerB[1].completion_day_level[day]?.["2"]?.star_gain);
+  const playerBStarGain = playerB1Star + playerB2Star;
+  return playerBStarGain - playerAStarGain;
+}
 function starGainSort(day: string, playerList: any[]) {
-  return [...playerList].sort((playerA, playerB) => {
-    const playerA1Star = parseInt(playerA[1].completion_day_level[day]?.["1"]?.star_gain);
-    const playerA2Star = parseInt(playerA[1].completion_day_level[day]?.["2"]?.star_gain);
-    const playerAStarGain = playerA1Star + playerA2Star;
-    const playerB1Star = parseInt(playerB[1].completion_day_level[day]?.["1"]?.star_gain);
-    const playerB2Star = parseInt(playerB[1].completion_day_level[day]?.["2"]?.star_gain);
-    const playerBStarGain = playerB1Star + playerB2Star;
-    return playerBStarGain - playerAStarGain;
-  });
+  return [...playerList].sort((playerA, playerB) => starGainCompare(playerA, playerB, day));
+}
+
+function firstStarCompare(playerA: any, playerB: any, day: string) {
+  const playerA1Ts = getNthStarTs(playerA[1], 1, day);
+  const playerB1Ts = getNthStarTs(playerB[1], 1, day);
+  if (playerA1Ts && playerB1Ts) {
+    return (playerA1Ts) - (playerB1Ts);
+  } else if (playerA1Ts && !playerB1Ts) {
+    return (playerA1Ts) - Number.MAX_SAFE_INTEGER;
+  } else if (!playerA1Ts && playerB1Ts) {
+    return Number.MAX_SAFE_INTEGER - (playerB1Ts - playerB1Ts);
+  }
+  return 0;
 }
 
 function firstStarSort(day: string, playerList: any[]) {
-  return [...playerList].sort((playerA, playerB) => {
-    const playerA1Ts = getNthStarTs(playerA[1], 1, day);
-    const playerB1Ts = getNthStarTs(playerB[1], 1, day);
-    if (playerA1Ts && playerB1Ts) {
-      return (playerA1Ts) - (playerB1Ts);
-    } else if (playerA1Ts && !playerB1Ts) {
-      return (playerA1Ts) - Number.MAX_SAFE_INTEGER;
-    } else if (!playerA1Ts && playerB1Ts) {
-      return Number.MAX_SAFE_INTEGER - (playerB1Ts - playerB1Ts);
-    }
-    return 0;
-  });
+  return [...playerList].sort((playerA, playerB) => firstStarCompare(playerA, playerB, day));
 }
 
 function insertStarGainsForDay(day: string, playerList: any[]) {
@@ -287,10 +320,11 @@ function getPlacementClass(idx: number) {
   }
 }
 
-function renderPlayer(player: any, selectedDay: string, idx: number, highscoreType: HighscoreType) {
+function renderPlayer(player: any, selectedDay: string, placement: number, highscoreType: HighscoreType, shared: boolean) {
+  let placementOffset =Array(Math.floor(Math.log10(placement))+2).fill(' ').join('')
   return (
     <div className="privboard-row" title={player.id}>
-      <span className="privboard-position">{idx+1})</span> {renderPlayerTime(player, selectedDay, highscoreType)} <span className={`privboard-name ${getPlacementClass(idx)} ${player.name === null ? 'leaderboard-anon' : ''}`}>{player.name ?? `(anonymous user #${player.id})`}</span></div>
+      <span className="privboard-position">{!shared?placement+')':placementOffset}</span> {renderPlayerTime(player, selectedDay, highscoreType)} <span className={`privboard-name ${getPlacementClass(placement-1)} ${player.name === null ? 'leaderboard-anon' : ''}`}>{player.name ?? `(anonymous user #${player.id})`}</span></div>
   )
 }
 
