@@ -6,6 +6,7 @@ enum HighscoreType {
   StarGain = 'stargain',
   FirstStar = 'firststar',
   Total = 'total',
+  TotalTime = 'totalTime',
 }
 const hourInMs = 1000*60*60;
 const hourInS = 60*60;
@@ -77,6 +78,7 @@ function App() {
               <option value={HighscoreType.Delta}>Time between star 1 and 2</option>
               <option value={HighscoreType.StarGain}>Points gained</option>
               <option value={HighscoreType.Total}>Total at day {selectedDay}</option>
+              <option value={HighscoreType.TotalTime}>Total time at day {selectedDay}</option>
       </select>
 
         {players.map((player, idx) => {
@@ -135,6 +137,8 @@ function sortPlayersForDay(day: string, highscoreType: HighscoreType, playerList
       return setPlacements(firstStarSort(day, playerList), day, firstStarCompare)
     case HighscoreType.Total:
       return setPlacements(totalScoreSort(day, playerList), day, totalScoreCompare)
+    case HighscoreType.TotalTime:
+      return setPlacements(totalTimeSort(day, playerList), day, totalTimeCompare)
   }
 }
 
@@ -189,6 +193,28 @@ function totalScoreCompare(playerA: any, playerB: any, day: string) {
 // You can get away with all kinds of sickening complexity when N < 200
 function totalScoreSort(day: string, playerList: any[]) {
   return [...playerList].sort((playerA, playerB) => totalScoreCompare(playerA,playerB,day))
+}
+
+
+function totalTimeCompare(playerA: any, playerB: any, day: string) {
+  let a = 0;
+  let b = 0;
+  for (let i = 1; i <= +day; i++) {
+    const date0S = new Date(2024, 11, i, 6, 0, 0, 0).getTime()/1000;
+    a+=getNthStarTs(playerA[1], 2, i.toString())-date0S;
+    b+=getNthStarTs(playerB[1], 2, i.toString())-date0S;
+  }
+  if (isNaN(a)) {
+    a = Number.MAX_SAFE_INTEGER;
+  }
+  if (isNaN(b)) {
+    b = Number.MAX_SAFE_INTEGER;
+  }
+  return a-b;
+}
+
+function totalTimeSort(day: string, playerList: any[]) {
+  return [...playerList].sort((playerA, playerB) => totalTimeCompare(playerA,playerB,day))
 }
 
 function starGainCompare(playerA: any, playerB: any, day: string) {
@@ -284,6 +310,16 @@ function renderPlayerTime(player: any, selectedDay: string, highscoreType: Highs
       total += getTotalPointGainForDay(i,player);
     }
     return total
+  } else if (highscoreType === HighscoreType.TotalTime) {
+    let total = 0;
+    for (let i = 1; i <= +selectedDay; i++) {
+      const date0S = new Date(2024, 11, i, 6, 0, 0, 0).getTime()/1000;
+      total += getNthStarTs(player, 2, ''+i) - date0S;
+    }
+    if (isNaN(total)) {
+      total = 0
+    }
+    return msToTimestamp(total);
   }
 }
 
@@ -291,6 +327,14 @@ function getTotalPointGainForDay(day: number, player: any) {
   let star1Gain = player.completion_day_level?.[''+day]?.["1"]?.star_gain;
   let star2Gain = player.completion_day_level?.[''+day]?.["2"]?.star_gain;
   return star1Gain+star2Gain;
+}
+
+function msToTimestamp(ms: number) {
+  const playerHours = Math.floor(ms/hourInS);
+  const playerMinutes = Math.floor((ms%hourInS)/minuteInS);
+  const playerSeconds = Math.floor((ms%minuteInS));
+  var formattedTime = playerHours + ':' + playerMinutes.toString().padStart(2, "0")+ ':' + playerSeconds.toString().padStart(2, "0");
+  return formattedTime;
 }
 
 function renderPlayerDeltaTimestamp(player: any, selectedDay: string) {
