@@ -6,7 +6,6 @@ body {
   font-family: "Source Code Pro", monospace;
   font-weight: 300;
   font-size: 14pt;
-  min-width: 60em;
   padding: 10px 16px;
 }
 img { border:0; }
@@ -32,6 +31,22 @@ a {
 @media (hover: hover) {
   a.leaderboard-daylinks-selected:hover {
       color: #99ff99;
+  }
+}
+select {
+  box-sizing: border-box;
+  padding: 5px 5px;
+  margin: 16px 0px;
+  background-color: #002624;
+  color: #DDD;
+  border: 1px solid #090;
+  box-shadow: 0px 0px 6px #090;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+  
+  option {
+    font-weight: bold;
   }
 }
  a:not(.leaderboard-daylinks-selected):hover, a:focus {
